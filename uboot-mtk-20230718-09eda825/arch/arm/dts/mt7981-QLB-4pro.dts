@@ -7,12 +7,18 @@
 / {
 	#address-cells = <1>;
 	#size-cells = <1>;
-	model = "mt7981-QLB-4pro";
+	model = "mt7981-QLB-4Pro";
 	compatible = "mediatek,mt7981", "mediatek,mt7981-rfb";
 
 	chosen {
 		stdout-path = &uart0;
 		tick-timer = &timer0;
+	};
+
+	config {
+		bootcmd = "mtkboardboot";
+		blink_led = "red:system";
+		system_led = "white:system";
 	};
 
 	mtd-layout {
@@ -28,12 +34,6 @@
 			mtdids = "nmbm0=nmbm0";
 			mtdparts = "nmbm0:1024k(bl2),512k(u-boot-env),2048k(Factory),2048k(fip),113408k(ubi)";
 		};
-	};
-
-	config {
-		bootcmd = "mtkboardboot";
-		blink_led = "red:run";
-		system_led = "green:system";
 	};
 
 	gpio-keys {
@@ -54,14 +54,15 @@
 		compatible = "gpio-leds";
 
 		led@0 {
-			label = "green:system";
-			gpios = <&gpio 7 GPIO_ACTIVE_LOW>;
+			label = "red:system";
+			gpios = <&gpio 35 GPIO_ACTIVE_LOW>;
 		};
 
 		led@1 {
-			label = "red:run";
-			gpios = <&gpio 3 GPIO_ACTIVE_LOW>;
-        };
+			label = "white:system";
+			gpios = <&gpio 34 GPIO_ACTIVE_LOW>;
+		};
+
 	};
 };
 
